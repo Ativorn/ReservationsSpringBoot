@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/header :: header">
+    </head>
+    <body>
+    <div th:replace="fragments/navigation :: navigation"> Navigation bar here</div>
+        <div class="container">
+            <div layout:fragment="content">Main content will be inserted here.</div>
+        </div>
+        <footer th:replace="fragments/footer :: footer"></footer>
+    </body>
+</html>

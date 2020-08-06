@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
+      layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>S'identifier</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+
+        <br/>
+        <br/>
+
+
+        <div class="card">
+            <div class="card-header" style="background-color: #65ddf1">
+                S'identifer
+            </div>
+            <div class="card-body">
+                <form method="post" th:action="@{/login}">
+                    <label for="username">Username</label>:
+                    <input id="username" name="username" type="text"/> <br/>
+                    <label for="password">Password</label>:
+                    <input id="password" name="password" type="password"/> <br/>
+
+
+                    <div class="alert-danger" th:if="${param.error ne null}"> username et password invalides</div>
+                    <div class="alert-normal" th:if="${param.logout ne null}">Vous avez été déconnecté.</div>
+
+                    <input type="submit" value="Connexion"/>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

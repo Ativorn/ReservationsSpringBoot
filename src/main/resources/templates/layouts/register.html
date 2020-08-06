@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>S'identifier</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                S'inscrire
+            </div>
+            <div class="card-body">
+
+                <form class="form-horizontal" th:action="@{/register}" th:method="post"
+                      th:object="${newUser}">
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input class="form-control" id="login" th:field="*{login}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" th:field="*{password}" type="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">First name</label>
+                        <input class="form-control" id="firstname" th:field="*{firstname}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last name</label>
+                        <input class="form-control" id="lastname" th:field="*{lastname}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email adress</label>
+                        <input class="form-control" id="email" th:field="*{email}" type="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="langue">Langue</label>
+                        <input class="form-control" id="langue" th:field="*{langue}" type="langue">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

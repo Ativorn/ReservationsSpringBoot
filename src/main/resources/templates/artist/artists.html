@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/main"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des artistes</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Ajouter Artist
+            </button>
+            <form class="dropdown-menu p-4" th:action="@{/artists/add}" th:method="post"
+                  th:object="${newArtist}">
+
+
+                <div class="form-group">
+                    <label for="firstname">Prenom </label>
+                    <input class="form-control" id="firstname" placeholder="Enter name"
+                           th:field="*{firstname}"
+                           type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="lastname"> Nom</label>
+                    <input class="form-control" id="lastname" placeholder="Enter name"
+                           th:field="*{lastname}"
+                           type="text"/>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+        </div>
+        <h1>Liste des artistes</h1>
+        <table class="table table-bordered" th:unless="${#lists.isEmpty(artists)}">
+            <thead>
+            <tr>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Types</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="artist : ${artists}">
+                <td th:text="${{artist.firstname}}"></td>
+                <td th:text="${{artist.lastname}}"></td>
+                <td th:text="${{artist.getTypesAsString()}}"></td>
+                <td>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Modifier Artist
+                        </button>
+                        <form class="dropdown-menu p-4" th:action="${'/artists/update/' + artist.id}" th:method="post"
+                              th:object="${newArtist}">
+                            <div class="form-group">
+                                <label>Prenom </label>
+                                <input class="form-control" th:value="${artist.firstname}"
+                                       th:field="*{firstname}"
+                                       type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <label> Nom</label>
+                                <input class="form-control" th:value="${artist.lastname}"
+                                       th:field="*{lastname}"
+                                       type="text"/>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Ajouter Type
+                        </button>
+                        <form class="dropdown-menu p-4" th:action="${'/artists/addtype/' + artist.id}" th:method="post"
+                              th:object="${artistType}">
+                            <div class="form-group">
+                                <label>Type </label>
+                                <select th:field="*{type}">
+                                    <option th:each="typ : ${types}"
+                                            th:value="${typ.id}"
+                                            th:text="${typ.type}" />
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
