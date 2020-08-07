@@ -1,9 +1,7 @@
 package be.iccbxl.pid.service.impl;
 
 import be.iccbxl.pid.exception.UserLoginUniqueConstraintViolation;
-import be.iccbxl.pid.model.RoleUser;
 import be.iccbxl.pid.model.User;
-import be.iccbxl.pid.repository.RoleUserRepository;
 import be.iccbxl.pid.repository.UserRepository;
 import be.iccbxl.pid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

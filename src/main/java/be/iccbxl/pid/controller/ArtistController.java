@@ -56,7 +56,6 @@ public class ArtistController {
         model.addAttribute("types", service.getAllTypes());
         return "artist/addTypeToArtist";
     }
-
     @PostMapping("/artists/addtype")
     public String addTypeToArtist(@ModelAttribute Artist artist, @ModelAttribute ArtistType artistType) {
         service.addTypeToArtist(artist, artistType);
