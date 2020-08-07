@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ArtistServiceImpl implements ArtistService {
@@ -49,10 +48,11 @@ public class ArtistServiceImpl implements ArtistService {
     }
 
     @Override
-    public void addTypeToArtist(Long artistId, ArtistType artistType) {
-        Optional<Artist> byId = artistRepository.findById(artistId);
-        if( byId.isPresent()){
-            artistType.setArtist(byId.get());
+    public void addTypeToArtist(Artist artist, ArtistType artistType) {
+        List<ArtistType> byArtist = artistTypeRepository.findByArtist(artist);
+        boolean alreadyExist = byArtist != null && byArtist.stream().anyMatch(at -> at.getType().getId().equals(artistType.getType().getId()));
+        if (!alreadyExist) {
+            artistType.setArtist(artist);
             artistTypeRepository.save(artistType);
         }
     }
@@ -68,7 +68,6 @@ public class ArtistServiceImpl implements ArtistService {
 
     public void deleteArtist(String id) {
         Long indice = (long) Integer.parseInt(id);
-
         artistRepository.deleteById(indice);
     }
 

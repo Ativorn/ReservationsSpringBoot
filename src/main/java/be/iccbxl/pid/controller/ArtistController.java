@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class ArtistController {
 
-	@Autowired
+    @Autowired
     private ArtistService service;
 
     @GetMapping("/artists")
@@ -24,8 +24,6 @@ public class ArtistController {
         List<Artist> artists = service.getAllArtists();
         model.addAttribute("artists", artists);
         model.addAttribute("newArtist", new Artist());
-        model.addAttribute("artistType", new ArtistType());
-        model.addAttribute("types",service.getAllTypes());
         return "artist/artists";
     }
 
@@ -33,20 +31,35 @@ public class ArtistController {
     public String addArtist(@ModelAttribute Artist newArtist) {
         service.addArtist(newArtist);
         return "redirect:/artists";
-	}
+    }
 
-    @PostMapping("/artists/update/{id}")
-    public String updateArtist(@PathVariable Long id , @ModelAttribute Artist newArtist) {
+    @GetMapping("/artists/update/{id}")
+    public String updateArtist(@PathVariable Long id, Model model) {
         Artist artist = service.getArtist(id.toString());
-        artist.setFirstname(newArtist.getFirstname());
-        artist.setLastname(newArtist.getLastname());
+        model.addAttribute("artist", artist);
+        return "artist/updateArtist";
+    }
+
+
+    @PostMapping("/artists/update")
+    public String updateArtist(@ModelAttribute Artist artist) {
         service.updateArtist(artist);
         return "redirect:/artists";
     }
 
-    @PostMapping("/artists/addtype/{id}")
-    public String addTypeToArtist(@PathVariable Long id ,@ModelAttribute ArtistType artistType) {
-        service.addTypeToArtist(id,artistType);
+
+    @GetMapping("/artists/addtype/{id}")
+    public String addTypeToArtist(@PathVariable Long id, Model model) {
+        Artist artist = service.getArtist(id.toString());
+        model.addAttribute("artist", artist);
+        model.addAttribute("artistType", new ArtistType());
+        model.addAttribute("types", service.getAllTypes());
+        return "artist/addTypeToArtist";
+    }
+
+    @PostMapping("/artists/addtype")
+    public String addTypeToArtist(@ModelAttribute Artist artist, @ModelAttribute ArtistType artistType) {
+        service.addTypeToArtist(artist, artistType);
         return "redirect:/artists";
     }
 

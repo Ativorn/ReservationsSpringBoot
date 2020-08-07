@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier un artist</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                Ajouter un type à un artist
+            </div>
+            <div class="card-body">
+
+                <form class="form-horizontal" th:action="@{/artists/addtype}" th:method="post"
+                      th:object="${artist}">
+                    <input th:field="*{id}" type="hidden"/>
+                    <div class="form-group">
+                        <label>Prénom: [[${artist.firstname}]]</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom: [[${artist.lastname}]]</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Types : </label>
+                        <label>[[${artist.getTypesAsString()}]]</label>
+                    </div>
+                    <div class="form-group" th:if="${types != null and not #lists.isEmpty(types)}"
+                         th:object="${artistType}">
+                        <label>New Type : </label>
+                        <select th:field="*{type}">
+                            <option th:each="typo : ${types}"
+                                    th:text="${typo.type}"
+                                    th:value="${typo.id}"/>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Ajouter</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

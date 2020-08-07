@@ -16,6 +16,6 @@ public interface ArtistService {
 
     Artist getArtist(String id);
 
-    void addTypeToArtist(Long artistId, ArtistType artistType);
+    void addTypeToArtist(Artist artist, ArtistType artistType);
 
 }

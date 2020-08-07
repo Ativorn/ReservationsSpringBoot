@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.mx/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="fragments/header :: header">
-    </head>
-    <body>
-    <div th:replace="fragments/navigation :: navigation"> Navigation bar here</div>
-        <div class="container">
-            <div layout:fragment="content">Main content will be inserted here.</div>
+<head th:replace="fragments/header :: header">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"> Navigation bar here</div>
+<div class="container">
+    <div layout:fragment="content">
+        <h1>
+            Bienvenue dans notre platform de reservation en ligne
+        </h1>
+        <div class="portrait">
+            <img alt="" si th:src="@{~/img/event.jpg}">
         </div>
-        <footer th:replace="fragments/footer :: footer"></footer>
-    </body>
+    </div>
+</div>
+<footer th:replace="fragments/footer :: footer"></footer>
+<script>
+    $(document).ready(function () {
+        $('#dtBasicExample').DataTable();
+    });
+
+    $.extend(true, $.fn.dataTable.defaults, {
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.16/i18n/French.json"
+        }
+    });
+</script>
+</body>
 </html>
