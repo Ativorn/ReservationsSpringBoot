@@ -12,7 +12,6 @@ public class StringToTypeConvertor implements Converter<String, Type> {
     @Autowired
     private TypeRepository typeRepository;
 
-
     @Override
     public Type convert(String s) {
         Long id = Long.valueOf(s);
