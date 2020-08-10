@@ -6,6 +6,8 @@ import be.iccbxl.pid.service.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import java.util.List;
 @Controller
 public class ArtistController {
 
+    public static final String UPDATE_ARTIST_PATH = "artist/updateArtist";
     @Autowired
     private ArtistService service;
 
@@ -37,12 +40,20 @@ public class ArtistController {
     public String updateArtist(@PathVariable Long id, Model model) {
         Artist artist = service.getArtist(id.toString());
         model.addAttribute("artist", artist);
-        return "artist/updateArtist";
+        return UPDATE_ARTIST_PATH;
     }
 
 
     @PostMapping("/artists/update")
-    public String updateArtist(@ModelAttribute Artist artist) {
+    public String updateArtist(@ModelAttribute Artist artist, BindingResult errors) {
+        if (StringUtils.isEmpty(artist.getLastname())) {
+            errors.rejectValue("lastname", "ERROR_001", "Valeur ne doit pas etre vide");
+            return "artist/updateArtist";
+        }
+        if (StringUtils.isEmpty(artist.getFirstname())) {
+            errors.rejectValue("firstname", "ERROR_001", "Valeur ne doit pas etre vide");
+            return UPDATE_ARTIST_PATH;
+        }
         service.updateArtist(artist);
         return "redirect:/artists";
     }
