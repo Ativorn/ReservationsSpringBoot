@@ -35,5 +35,12 @@ public class Location {
 
     @OneToMany(mappedBy = "location")
     private List<Representation> representations;
+
+    public String asString() {
+        if (designation == null)
+            return "";
+        else
+            return designation;
+    }
 }
 

@@ -12,7 +12,8 @@
         <br/>
         <div class="card" style="max-width:400px">
             <div class="card-header" style="background-color: #65ddf1">
-                Modifier une location
+                <a th:if=="${location.id}"> Modifier location </a>
+                <a th:unless=="${location.id}"> Ajouter location </a>
             </div>
             <div class="card-body">
 
@@ -33,7 +34,35 @@
                         <span class="badge badge-danger" th:errors="*{address}"
                               th:if="${#fields.hasErrors('address')}"></span>
                     </div>
-                    <button class="btn btn-primary" type="submit">Modifier</button>
+                    <div class="form-group">
+                        <label for="locality">Localité</label>
+
+                        <select id="locality" th:field="*{locality}"
+                                th:if="${localities != null and not #lists.isEmpty(localities)}">
+                            <option th:each="loc : ${localities}"
+                                    th:text="${loc.toString()}"
+                                    th:value="${loc.id}"/>
+                        </select>
+                        <span class="badge badge-danger" th:errors="*{locality}"
+                              th:if="${#fields.hasErrors('locality')}"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Website</label>
+                        <input class="form-control" id="website" placeholder="website" th:field="*{website}"
+                               type="text">
+                        <span class="badge badge-danger" th:errors="*{website}"
+                              th:if="${#fields.hasErrors('website')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Phone</label>
+                        <input class="form-control" id="phone" placeholder="phone" th:field="*{phone}"
+                               type="tel">
+                        <span class="badge badge-danger" th:errors="*{phone}"
+                              th:if="${#fields.hasErrors('phone')}"></span>
+                    </div>
+                    <button class="btn btn-primary" type="submit"><a th:if=="${location.id}"> Modifier </a>
+                        <a th:unless=="${location.id}"> Ajouter </a></button>
                 </form>
             </div>
         </div>

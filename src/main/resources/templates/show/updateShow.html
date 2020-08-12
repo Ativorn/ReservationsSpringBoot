@@ -4,6 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Modifier un show</title>
+
 </head>
 <body>
 <div layout:fragment="content">
@@ -12,58 +13,61 @@
         <br/>
         <div class="card" style="max-width:400px">
             <div class="card-header" style="background-color: #65ddf1">
+                <a th:if=="${show.id}"> Modifier </a>
+                <a th:unless=="${show.id}"> Ajouter </a></button>
             </div>
             <div class="card-body">
 
                 <form class="form-horizontal" th:action="@{/shows/add}" th:method="post"
                       th:object="${show}">
                     <input th:field="*{id}" type="hidden"/>
+
+
                     <div class="form-group">
-                        <label for="slug">Slug</label>
-                        <input class="form-control" id="slug" placeholder="slug" th:field="*{slug}"
-                               type="text">
-                        <span class="badge badge-danger" th:errors="*{slug}"
-                              th:if="${#fields.hasErrors('slug')}"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="titre">Titre</label>
-                        <input class="form-control" id="titre" placeholder="titre" th:field="*{title}"
+                        <label for="title">Titre</label>
+                        <input class="form-control" id="title" placeholder="titre" th:field="*{title}"
                                type="text">
                         <span class="badge badge-danger" th:errors="*{title}"
-                              th:if="${#fields.hasErrors('titre')}"></span>
+                              th:if="${#fields.hasErrors('title')}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="titre">description</label>
-                        <input class="form-control" id="description" placeholder="description" th:field="*{description}"
-                               type="text">
+                        <label for="description">description</label>
+                        <textarea class="form-control" cols="50" id="description" name="description" rows="4"
+                                  th:field="*{description}"
+                        />
                         <span class="badge badge-danger" th:errors="*{description}"
                               th:if="${#fields.hasErrors('description')}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="titre">poster_url</label>
+                        <label for="poster_url">poster_url</label>
                         <input class="form-control" id="poster_url" placeholder="poster_url" th:field="*{poster_url}"
                                type="text">
                         <span class="badge badge-danger" th:errors="*{poster_url}"
                               th:if="${#fields.hasErrors('poster_url')}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="titre">Location_id</label>
-                        <input class="form-control" id="location_id" placeholder="location_id" th:field="*{location}"
-                               type="text">
+                        <label for="location">Localité</label>
+
+                        <select id="location" th:field="*{location}"
+                                th:if="${location != null and not #lists.isEmpty(location)}">
+                            <option th:each="loc : ${location}"
+                                    th:text="${loc.asString()}"
+                                    th:value="${loc.id}"/>
+                        </select>
                         <span class="badge badge-danger" th:errors="*{location}"
-                              th:if="${#fields.hasErrors('location_id')}"></span>
+                              th:if="${#fields.hasErrors('location')}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="titre">Bookable</label>
-                        <input class="form-control" id="bookable" placeholder="bookable" th:field="*{bookable}"
-                               type="text">
+                        <label for="bookable">Bookable</label>
+                        <input class="form-control" id="bookable" th:field="*{bookable}"
+                               type="checkbox">
                         <span class="badge badge-danger" th:errors="*{bookable}"
                               th:if="${#fields.hasErrors('bookable')}"></span>
                     </div>
                     <div class="form-group">
-                        <label for="titre">Price</label>
-                        <input class="form-control" id="price" placeholder="price" th:field="*{price}"
-                               type="text">
+                        <label for="price">Price</label>
+                        <input class="form-control" id="price" step=".01"
+                               th:field="*{price}" type="number"/>
                         <span class="badge badge-danger" th:errors="*{price}"
                               th:if="${#fields.hasErrors('price')}"></span>
                     </div>

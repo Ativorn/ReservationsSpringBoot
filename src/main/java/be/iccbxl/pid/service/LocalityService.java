@@ -12,6 +12,7 @@ public interface LocalityService {
 
     void updateLocality(Locality locality);
 
+
     Locality getLocality(String id);
 
     void addLocalityToLocation(Location location, Locality locality);

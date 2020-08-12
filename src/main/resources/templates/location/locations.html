@@ -9,13 +9,8 @@
 <div layout:fragment="content">
     <div class="container">
 
-        <div class="btn-group">
-            <button aria-expanded="false" aria-haspopup="true" class="btn btn-success dropdown-toggle"
-                    data-toggle="dropdown"
-                    type="button">
-                Ajouter location
-            </button>
-        </div>
+        <a class="button" th:href="@{'/locations/add'}"> Ajouter nouveau location </a>
+        </br>
         <h1>Liste des locations</h1>
         <table class="table table-striped table-bordered" id="dtBasicExample" style="width:100%"
                th:unless="${#lists.isEmpty('Locations')}">
@@ -25,6 +20,8 @@
                 <th scope="col">Address</th>
                 <th scope="col">Website</th>
                 <th scope="col">Phone</th>
+                <th scope="col">Locality</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +30,7 @@
                 <td th:text="${{location.address}}"></td>
                 <td th:text="${{location.website}}"></td>
                 <td th:text="${{location.phone}}"></td>
+                <td th:text="${{location.getLocality()}}"></td>
                 <td>
                     <a th:href="@{'/locations/update/'+ ${location.id}}"> Modifier </a>
                 </td>
@@ -40,10 +38,12 @@
             </tbody>
             <tfoot>
             <tr>
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Types</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Address</th>
+                <th scope="col">Website</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Locality</th>
+                <th scope="col"></th>
             </tr>
             </tfoot>
         </table>

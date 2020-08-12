@@ -3,6 +3,7 @@ package be.iccbxl.pid.service.impl;
 import be.iccbxl.pid.model.Locality;
 import be.iccbxl.pid.model.Location;
 import be.iccbxl.pid.repository.LocalityRepository;
+import be.iccbxl.pid.repository.LocationRepository;
 import be.iccbxl.pid.service.LocalityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class LocalityServiceImpl implements LocalityService {
     @Autowired
     private LocalityRepository localityRepository;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
     @Override
     public List<Locality> getAllLocalities() {
         List<Locality> localities = new ArrayList<>();
@@ -23,19 +27,28 @@ public class LocalityServiceImpl implements LocalityService {
     }
 
     @Override
-    public Locality getLocality(String id) {
-        int indice = Integer.parseInt(id);
+    public void addLocality(Locality locality) {
+        localityRepository.save(locality);
 
-        return localityRepository.findById(indice);
     }
 
     @Override
-    public void addLocalityToLocation(Locality locality, Location location) {
-        List<ArtistType> byArtist = artistTypeRepository.findByArtist(artist);
-        boolean alreadyExist = byArtist != null && byArtist.stream().anyMatch(at -> at.getType().getId().equals(artistType.getType().getId()));
-        if (!alreadyExist) {
-            artistType.setArtist(artist);
-            artistTypeRepository.save(artistType);
+    public void updateLocality(Locality locality) {
+        localityRepository.save(locality);
+
+    }
+
+    @Override
+    public Locality getLocality(String id) {
+        Long indice = Long.valueOf(id);
+        return localityRepository.findById(indice).orElse(null);
+    }
+
+    @Override
+    public void addLocalityToLocation(Location location, Locality locality) {
+        locality = localityRepository.save(locality);
+        location.setLocality(locality);
+        locationRepository.save(location);
         }
     }
-}
+
