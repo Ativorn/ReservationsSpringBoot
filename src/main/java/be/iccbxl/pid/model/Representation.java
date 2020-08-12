@@ -16,12 +16,13 @@ public class Representation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "when", columnDefinition = "TIMESTAMP")
-    private LocalDateTime when;
 
     @ManyToOne
     @JoinColumn(name = "show_id")
     private Show show;
+
+    @Column(name = "when", columnDefinition = "TIMESTAMP")
+    private LocalDateTime when;
 
     @ManyToOne
     @JoinColumn(name = "location_id")

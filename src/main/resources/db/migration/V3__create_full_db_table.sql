@@ -3,12 +3,12 @@
 --
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `firstname` varchar(60) DEFAULT NULL,
-  `langue` varchar(2) DEFAULT NULL,
-  `lastname` varchar(60) DEFAULT NULL,
   `login` varchar(30) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `firstname` varchar(60) DEFAULT NULL,
+  `lastname` varchar(60) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `langue` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8mb4_unicode_ci;
 
@@ -77,8 +77,9 @@ CREATE TABLE `artiste_type` (
 
 CREATE TABLE `localities` (
   `id` int(11) NOT NULL,
-  `locality` varchar(60) DEFAULT NULL,
   `postal_code` varchar(6) DEFAULT NULL,
+  `locality` varchar(60) DEFAULT NULL,
+
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8mb4_unicode_ci;
 
@@ -87,11 +88,13 @@ CREATE TABLE `localities` (
 --
 CREATE TABLE `locations` (
   `id` int(11) NOT NULL,
-  `description` varchar(60) DEFAULT NULL,
-  `poster_url` varchar(255) DEFAULT NULL,
   `slug` varchar(60) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
+  `designation` varchar(60) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `locality_id` int(11) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  `phone` varchar(30) DEFAULT NULL,
+
   PRIMARY KEY (`id`),
   KEY `FK77hu8gj8t78jri9tncc5w79cf` (`locality_id`),
   CONSTRAINT `FK77hu8gj8t78jri9tncc5w79cf` FOREIGN KEY (`locality_id`) REFERENCES `localities` (`id`)
@@ -103,13 +106,14 @@ CREATE TABLE `locations` (
 --
 CREATE TABLE `shows` (
   `id` int(11) NOT NULL,
-  `bookable` bit(1) NOT NULL,
-  `description` text,
-  `poster_url` varchar(255) DEFAULT NULL,
-  `price` float NOT NULL,
   `slug` varchar(60) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  `poster_url` varchar(255) DEFAULT NULL,
   `location_id` int(11) DEFAULT NULL,
+  `bookable` bit(1) NOT NULL,
+  `price` float NOT NULL,
+
   PRIMARY KEY (`id`),
   KEY `FK71bpp8yqp5gsimorvud4hw7pg` (`location_id`),
   CONSTRAINT `FK71bpp8yqp5gsimorvud4hw7pg` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`)
@@ -137,9 +141,9 @@ CREATE TABLE `artiste_type_show` (
 --
 CREATE TABLE `representations` (
   `id` int(11) NOT NULL,
-  `location_id` int(11) DEFAULT NULL,
   `show_id` int(11) DEFAULT NULL,
   `when` timestamp NULL DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKgqakkndousv8wnvorqc0gxi9a` (`location_id`),
   KEY `FKy5ar9ujldy3xw9p62v1qj3cs` (`show_id`),
@@ -154,9 +158,9 @@ CREATE TABLE `representations` (
 
 CREATE TABLE `representation_user` (
   `id` int(11) NOT NULL,
-  `places` int(11) NOT NULL,
   `representation_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `places` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKq2e0m47f76gpu7rbhyy8c9lvl` (`user_id`),
   KEY `FKe66sbi0sqmyw3hvtth2krm5tq` (`representation_id`),

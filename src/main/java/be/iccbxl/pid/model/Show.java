@@ -21,17 +21,20 @@ public class Show {
     @Column(length = 60)
     private String slug;
     private String title;
+
     @Column(columnDefinition = "TEXT")
     private String description;
     private String poster_url;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     private boolean bookable;
 
     private float price;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id")
-    private Location location;
+
 
     @OneToMany(mappedBy = "show")
     private List<ArtistTypeShow> artistTypeShows;

@@ -18,15 +18,17 @@ public class Location {
     private Long id;
     @Column(length = 60)
     private String slug;
-    private String title;
     @Column(length = 60)
-    private String description;
-    private String poster_url;
-
+    private String designation;
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "locality_id")
     private Locality locality;
+
+    private String website;
+    @Column(length = 30)
+    private String phone;
 
     @OneToMany(mappedBy = "location")
     private List<Show> shows;
