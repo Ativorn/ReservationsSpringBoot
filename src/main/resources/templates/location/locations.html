@@ -21,20 +21,20 @@
                th:unless="${#lists.isEmpty('Locations')}">
             <thead>
             <tr>
-                <th scope="col">Prénom</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Types</th>
-                <th scope="col">Actions</th>
+                <th scope="col">Designation</th>
+                <th scope="col">Address</th>
+                <th scope="col">Website</th>
+                <th scope="col">Phone</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="location : ${locations}">
-                <td th:text="${{location.desccription}}"></td>
-                <td th:text="${{location.poster_url}}"></td>
-                <td th:text="${{location.getTypesAsString()}}"></td>
+            <tr th:each="location : ${Locations}">
+                <td th:text="${{location.designation}}"></td>
+                <td th:text="${{location.address}}"></td>
+                <td th:text="${{location.website}}"></td>
+                <td th:text="${{location.phone}}"></td>
                 <td>
-                    <a th:href="@{'/artists/update/'+ ${location.id}}"> Modifier </a>
-                    <a th:href="@{'/artists/addtype/'+ ${location.id}}"> +Type </a>
+                    <a th:href="@{'/locations/update/'+ ${location.id}}"> Modifier </a>
                 </td>
             </tr>
             </tbody>

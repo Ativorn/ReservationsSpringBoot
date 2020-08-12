@@ -18,5 +18,15 @@ public class LocationServiceImpl implements LocationService {
         return locationRepository.findAll();
     }
 
+    @Override
+    public Location findLocationById(Long id) {
+        return locationRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Location saveLocation(Location location) {
+        return locationRepository.save(location);
+    }
+
 
 }

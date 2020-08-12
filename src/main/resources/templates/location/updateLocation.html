@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier une location</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                Modifier une location
+            </div>
+            <div class="card-body">
+
+                <form class="form-horizontal" th:action="@{/locations/update}" th:method="post"
+                      th:object="${location}">
+                    <input th:field="*{id}" type="hidden"/>
+                    <div class="form-group">
+                        <label for="designation">Désignation</label>
+                        <input class="form-control" id="designation" placeholder="designation" th:field="*{designation}"
+                               type="text">
+                        <span class="badge badge-danger" th:errors="*{designation}"
+                              th:if="${#fields.hasErrors('designation')}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Addresse</label>
+                        <input class="form-control" id="address" placeholder="addresse" th:field="*{address}"
+                               type="text">
+                        <span class="badge badge-danger" th:errors="*{address}"
+                              th:if="${#fields.hasErrors('address')}"></span>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Modifier</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

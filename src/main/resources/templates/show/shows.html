@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des agents</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+
+        <a th:href="@{'/agents/add'}"> Ajouter nouveau show </a>
+        <h1>Liste des shows</h1>
+        <table class="table table-striped table-bordered" id="dtBasicExample" style="width:100%"
+               th:unless="${#lists.isEmpty('Shows')}">
+            <thead>
+            <tr>
+                <th scope="col">slug</th>
+                <th scope="col">titre</th>
+                <th scope="col">description</th>
+                <th scope="col">poster_url</th>
+                <th scope="col">location_id</th>
+                <th scope="col">bookable</th>
+                <th scope="col">price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="show : ${Shows}">
+                <td th:text="${{show.slug}}"></td>
+                <td th:text="${{show.titre}}"></td>
+                <td th:text="${{show.description}}"></td>
+                <td th:text="${{show.poster_url}}"></td>
+                <td th:text="${{show.location_id}}"></td>
+                <td th:text="${{show.bookable}}"></td>
+                <td th:text="${{show.price}}"></td>
+                <td><a th:href="@{'/shows/update/'+ ${show.id}}"> Modifier </a>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col">slug</th>
+                <th scope="col">titre</th>
+                <th scope="col">description</th>
+                <th scope="col">poster_url</th>
+                <th scope="col">location_id</th>
+                <th scope="col">bookable</th>
+                <th scope="col">price</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
