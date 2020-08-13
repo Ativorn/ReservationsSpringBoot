@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @Getter
@@ -41,6 +42,15 @@ public class Show {
 
     @OneToMany(mappedBy = "show")
     private List<Representation> representations;
+
+    public String getListOfArtists() {
+        if (artistTypeShows == null || artistTypeShows.isEmpty()) {
+            return "";
+        } else {
+            return artistTypeShows.stream().map(artist -> artist.getArtistType() + " " + artist.getId()).collect(Collectors.joining(",", "[", "]"));
+
+        }
+    }
 
 
 }

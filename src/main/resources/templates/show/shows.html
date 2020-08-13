@@ -21,7 +21,8 @@
                 <th scope="col">poster_url</th>
                 <th scope="col">location_id</th>
                 <th scope="col">bookable</th>
-                <th scope="col">price</th>
+                <th scope="col">price
+                <th scope="col">Artistes</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -34,7 +35,9 @@
                 <td th:text="${{show.location}}"></td>
                 <td th:text="${{show.bookable}}"></td>
                 <td th:text="${{show.price}}"></td>
+                <td th:text="${{show.getListOfArtists()}}"></td>
                 <td><a th:href="@{'/shows/update/'+ ${show.id}}"> Modifier </a>
+                    <a th:href="@{'/shows/addArtist/'+ ${show.id}}"> + Artiste </a></td>
             </tr>
             </tbody>
             <tfoot>
@@ -46,6 +49,7 @@
                 <th scope="col">location_id</th>
                 <th scope="col">bookable</th>
                 <th scope="col">price</th>
+                <th scope="col">Artistes</th>
                 <th scope="col"></th>
             </tr>
             </tfoot>
