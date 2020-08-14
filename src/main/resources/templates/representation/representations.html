@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des spectacles</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+
+        <h1>Liste des spectacles</h1>
+        <table class="table table-striped table-bordered" id="dtBasicExample" style="width:100%"
+               th:unless="${#lists.isEmpty('representations')}">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">titre</th>
+                <th scope="col">Auteurs</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Réservable</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            private Show show;
+
+            private LocalDateTime when;
+
+            private Location location;
+            <tr th:each="spectacle : ${representations}">
+                <td></td>
+                <td th:text="${{spectacle.show.title}}"></td>
+                <td th:text="${{spectacle.show.getListOfArtists()}}"></td>
+                <td th:text="${{spectacle.location}}"></td>
+                <td th:text="${{spectacle.whenTime}}"></td>
+                <td th:text="${{spectacle.show.price}}"></td>
+                <td th:text="${{spectacle.show.bookable}}"></td>
+                <td><a th:href="@{'/spectacles/update/'+ ${spectacle.id}}"> Modifier </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">titre</th>
+                <th scope="col">Auteurs</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Réservable</th>
+                <th scope="col"></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+    <div class="container">
+        <form class="form-horizontal" th:action="@{'/representations/add'}">
+            <button aria-expanded="false" aria-haspopup="true" class="btn btn-success"
+                    type="button">
+                Ajouter un spectacle
+            </button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -33,7 +33,11 @@ public class User  {
     @OneToMany(mappedBy = "artist")
     private List<ArtistType> types ;
 
+    @Transient
+    private String fullUrlImg;
 
+    @Transient
+    private String roles;
 
     public User(String login, String password, String firstname, String lastname, String email, String langue) {
         this.login = login;
@@ -49,5 +53,6 @@ public class User  {
     public String toString() {
         return login +" "+ lastname;
     }
+
 
 }

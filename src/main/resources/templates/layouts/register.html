@@ -16,8 +16,14 @@
             </div>
             <div class="card-body">
 
-                <form class="form-horizontal" th:action="@{/register}" th:method="post"
+                <form class="form-horizontal" enctype="multipart/form-data" th:action="@{/register}" th:method="post"
                       th:object="${newUser}">
+                    <div class="form-group">
+                        <label class="control-label">Url Photo</label>
+                        <input accept="image/jpeg" class="form-control" id="urlImg"
+                               name="file" placeholder=" ex.: fanta.jpeg" type="file"/>
+                    </div>
+
                     <div class="form-group">
                         <label for="login">Login</label>
                         <input class="form-control" id="login" th:field="*{login}" type="text">

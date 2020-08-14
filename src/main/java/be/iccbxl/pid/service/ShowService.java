@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface ShowService {
     List<Show> getAllShows();
-
     List<ArtistType> getAllArtistTypes();
 
 
@@ -18,4 +17,3 @@ public interface ShowService {
 
     void addArtistToShow(Show show, ArtistTypeShow artistTypeShow);
 }
-

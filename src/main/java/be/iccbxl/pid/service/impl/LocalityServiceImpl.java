@@ -49,6 +49,6 @@ public class LocalityServiceImpl implements LocalityService {
         locality = localityRepository.save(locality);
         location.setLocality(locality);
         locationRepository.save(location);
-        }
     }
+}
 

@@ -1,13 +1,18 @@
 package be.iccbxl.pid.service.impl;
 
 import be.iccbxl.pid.exception.UserLoginUniqueConstraintViolation;
+import be.iccbxl.pid.model.RoleUser;
 import be.iccbxl.pid.model.User;
+import be.iccbxl.pid.repository.RoleUserRepository;
 import be.iccbxl.pid.repository.UserRepository;
 import be.iccbxl.pid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,11 +20,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-
+    @Autowired
+    private RoleUserRepository roleUserRepository;
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<User> all = userRepository.findAll();
+        all.forEach(user -> user.setRoles(Stream.of(getRolesOf(user)).collect(Collectors.joining(",", "[", "]"))));
+        return all;
     }
 
     @Override
@@ -52,6 +60,20 @@ public class UserServiceImpl implements UserService {
         Long indice = (long) Integer.parseInt(id);
 
         userRepository.deleteById(indice);
+    }
+
+
+    public String[] getRolesOf(User user) {
+        List<RoleUser> all = roleUserRepository.findByUser(user);
+        String[] roles = {};
+        if (all != null && !all.isEmpty()) {
+            roles = all.stream()
+                    .map(roleUser -> roleUser.getRole())
+                    .filter(role -> !Objects.isNull(role))
+                    .map(role -> role.getRole())
+                    .toArray(String[]::new);
+        }
+        return roles;
     }
 
 }

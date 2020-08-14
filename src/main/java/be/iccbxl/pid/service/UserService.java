@@ -24,4 +24,6 @@ public interface UserService {
      * @return return the user found by login, null otherwise
      */
     User getUserByLogin(String login);
+
+    String[] getRolesOf(User user);
 }

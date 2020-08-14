@@ -72,7 +72,6 @@ public class ShowController {
         model.addAttribute("artists", allArtistTypes);
         return "show/addArtist";
     }
-
     @PostMapping("/shows/addartist")
     public String addArtistToShow(@ModelAttribute ArtistTypeShow artistTypeShow, @ModelAttribute Show show) {
         showService.addArtistToShow(show, artistTypeShow);

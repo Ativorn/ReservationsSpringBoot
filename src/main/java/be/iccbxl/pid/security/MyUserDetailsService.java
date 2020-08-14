@@ -1,8 +1,6 @@
 package be.iccbxl.pid.security;
 
-import be.iccbxl.pid.model.RoleUser;
 import be.iccbxl.pid.model.User;
-import be.iccbxl.pid.repository.RoleUserRepository;
 import be.iccbxl.pid.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
 
 
 @Component
@@ -23,8 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RoleUserRepository roleUserRepository ;
+
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -43,17 +38,10 @@ public class MyUserDetailsService implements UserDetailsService {
 
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-            List<RoleUser> all = roleUserRepository.findByUser(user);
-            String[] roles  = {} ;
-            if (all!= null && !all.isEmpty()){
-                roles =  all.stream()
-                        .map(roleUser -> roleUser.getRole())
-                        .filter(role ->! Objects.isNull(role))
-                        .map(role -> role.getRole())
-                        .toArray(String[]::new);
-            }
+            String[] roles = userService.getRolesOf(user);
             return AuthorityUtils.createAuthorityList(roles);
         }
+
 
         @Override
         public String getPassword() {

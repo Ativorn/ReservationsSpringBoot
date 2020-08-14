@@ -1,5 +1,6 @@
 package be.iccbxl.pid.model;
 
+import be.iccbxl.pid.convertor.LocalDateTimeConverter;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,10 +20,20 @@ public class Representation {
 
     @ManyToOne
     @JoinColumn(name = "show_id")
+
     private Show show;
 
-    @Column(name = "when", columnDefinition = "TIMESTAMP")
-    private LocalDateTime when;
+    // URL to solution https://dzone.com/articles/dealing-with-javas-localdatetime-in-jpa
+    @Column(name = "when_time")
+    @Convert(converter = LocalDateTimeConverter.class)
+    private LocalDateTime whenTime;
+
+    @Transient
+    private String date;
+
+    @Transient
+    private String time;
+
 
     @ManyToOne
     @JoinColumn(name = "location_id")
