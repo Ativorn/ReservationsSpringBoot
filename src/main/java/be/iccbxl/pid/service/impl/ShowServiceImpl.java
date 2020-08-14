@@ -1,9 +1,9 @@
 package be.iccbxl.pid.service.impl;
 
-import be.iccbxl.pid.model.Artist;
+import be.iccbxl.pid.model.ArtistType;
 import be.iccbxl.pid.model.ArtistTypeShow;
 import be.iccbxl.pid.model.Show;
-import be.iccbxl.pid.repository.ArtistRepository;
+import be.iccbxl.pid.repository.ArtistTypeRepository;
 import be.iccbxl.pid.repository.ArtistTypeShowRepository;
 import be.iccbxl.pid.repository.ShowRepository;
 import be.iccbxl.pid.service.ShowService;
@@ -20,7 +20,7 @@ public class ShowServiceImpl implements ShowService {
     @Autowired
     private ArtistTypeShowRepository artistTypeShowRepository;
     @Autowired
-    private ArtistRepository artistRepository;
+    private ArtistTypeRepository artistTypeRepository;
 
 
     @Override
@@ -29,10 +29,10 @@ public class ShowServiceImpl implements ShowService {
     }
 
     @Override
-    public List<Artist> getAllArtists() {
-        List<Artist> artists = new ArrayList<>();
+    public List<ArtistType> getAllArtistTypes() {
+        List<ArtistType> artists = new ArrayList<>();
 
-        artistRepository.findAll().forEach(artists::add);
+        artistTypeRepository.findAll().forEach(artists::add);
 
         return artists;
     }
@@ -41,7 +41,6 @@ public class ShowServiceImpl implements ShowService {
     public Show saveShow(Show show) {
         return showRepository.save(show);
     }
-
     @Override
     public Show findShowById(Long id) {
         return showRepository.findById(id).orElse(null);

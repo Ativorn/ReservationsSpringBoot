@@ -47,7 +47,7 @@ public class Show {
         if (artistTypeShows == null || artistTypeShows.isEmpty()) {
             return "";
         } else {
-            return artistTypeShows.stream().map(artist -> artist.getArtistType() + " " + artist.getId()).collect(Collectors.joining(",", "[", "]"));
+            return artistTypeShows.stream().map(artist -> artist.getArtistType().getArtist().getFullName() + "[ " + artist.getArtistType().getType().getType() + "]").collect(Collectors.joining(",", "[", "]"));
 
         }
     }

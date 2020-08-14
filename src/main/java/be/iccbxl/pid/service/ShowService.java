@@ -1,6 +1,6 @@
 package be.iccbxl.pid.service;
 
-import be.iccbxl.pid.model.Artist;
+import be.iccbxl.pid.model.ArtistType;
 import be.iccbxl.pid.model.ArtistTypeShow;
 import be.iccbxl.pid.model.Show;
 
@@ -9,7 +9,7 @@ import java.util.List;
 public interface ShowService {
     List<Show> getAllShows();
 
-    List<Artist> getAllArtists();
+    List<ArtistType> getAllArtistTypes();
 
 
     Show saveShow(Show show);
@@ -18,3 +18,4 @@ public interface ShowService {
 
     void addArtistToShow(Show show, ArtistTypeShow artistTypeShow);
 }
+

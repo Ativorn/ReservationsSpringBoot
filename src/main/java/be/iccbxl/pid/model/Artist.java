@@ -49,6 +49,10 @@ public class Artist {
 					.collect(Collectors.joining(" , ","[","]"));
 		}
 	}
+
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
+    }
 }
 	
 	

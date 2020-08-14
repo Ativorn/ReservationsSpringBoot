@@ -21,12 +21,12 @@
                     <input th:field="*{id}" type="hidden"/>
 
                     <div class="form-group" th:if="${artists != null and not #lists.isEmpty(artists)}"
-                         th:object="${container}">
+                         th:object="${artistTypeShow}">
                         <label>New Type : </label>
-                        <select th:field="*{artist}">
-                            <option th:each="art : ${artists}"
-                                    th:text="${art.firstname+ ' ' + art.lastname}"
-                                    th:value="${art.id}"/>
+                        <select th:field="*{artistType}">
+                            <option th:each="artT : ${artists}"
+                                    th:text="${artT.artist.firstname+ ' ' + artT.artist.lastname +'['+artT.type.type+']'}"
+                                    th:value="${artT.id}"/>
                         </select>
                     </div>
                     <button class="btn btn-primary" type="submit">Ajouter</button>

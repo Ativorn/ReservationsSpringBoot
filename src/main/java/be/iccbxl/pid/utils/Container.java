@@ -14,8 +14,6 @@ public class Container {
         this.locality = locality;
     }
 
-    private Artist artist;
-
     public Artist getArtist() {
         return artist;
     }
@@ -23,4 +21,6 @@ public class Container {
     public void setArtist(Artist artist) {
         this.artist = artist;
     }
+
+    private Artist artist;
 }
