@@ -47,7 +47,6 @@ public class UserController {
         model.addAttribute("users", users);
         return "users/users";
     }
-
     @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> loadImageFromServer(@PathVariable String filename, HttpServletRequest request) {
@@ -57,6 +56,7 @@ public class UserController {
                 .header(HttpHeaders.CONTENT_DISPOSITION,
                         "attachment; filename=\"" + file.getFilename()).body(file);
     }
+
     @PostMapping("/register")
     public String addArtist(@ModelAttribute User newUser, @RequestParam MultipartFile file) {
 

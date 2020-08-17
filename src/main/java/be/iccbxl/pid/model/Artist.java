@@ -50,8 +50,8 @@ public class Artist {
 		}
 	}
 
-	public String getFullName() {
-		return getFirstname() + " " + getLastname();
+    public String getFullName() {
+        return getFirstname() + " " + getLastname();
 	}
 }
 	

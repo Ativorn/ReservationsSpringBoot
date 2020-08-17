@@ -13,7 +13,6 @@ public class RepresentationServiceImpl implements RepresentationService {
 
     @Autowired
     private RepresentationRepository representationRepository;
-
     @Override
     public List<Representation> getAllRepresentations() {
         return representationRepository.findAll();
