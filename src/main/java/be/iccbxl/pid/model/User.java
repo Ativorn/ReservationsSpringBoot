@@ -30,6 +30,8 @@ public class User  {
     @Column(length = 2)
     private String langue;
 
+    private boolean active;
+
     @OneToMany(mappedBy = "artist")
     private List<ArtistType> types ;
 
@@ -38,6 +40,9 @@ public class User  {
 
     @Transient
     private String roles;
+
+    @Transient
+    private String newPassword;
 
     public User(String login, String password, String firstname, String lastname, String email, String langue) {
         this.login = login;

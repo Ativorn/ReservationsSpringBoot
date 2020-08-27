@@ -6,6 +6,7 @@ public interface RoleService {
 
     String ADMIN = "ROLE_ADMIN";
     String MEMBRE = "ROLE_MEMBER";
+    String AFFILIATE = "ROLE_AFFILIATE";
 
     /**
      * assgign the specific role to the specified user.

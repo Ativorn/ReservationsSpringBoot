@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                Profile
+            </div>
+            <div class="card-body" th:object="${user}">
+                <div class="form-group">
+                    <img height="auto"
+                         th:src="@{${user.fullUrlImg}}" width="100"/>
+                </div>
+
+                <div class="form-group">
+                    <h4>Login</h4>
+                    <label>[[${user.login}]]</label>
+                </div>
+                <div class="form-group">
+                    <h4>Password</h4>
+                    <label>**************</label>
+                </div>
+                <div class="form-group">
+                    <h4>First name</h4>
+                    <label>[[${user.firstname}]]</label>
+                </div>
+                <div class="form-group">
+                    <h4>Last name</h4>
+                    <label>[[${user.lastname}]]</label>
+                </div>
+                <div class="form-group">
+                    <h4>Email adress</h4>
+                    <label>[[${user.email}]]</label>
+                </div>
+                <div class="form-group">
+                    <h4>Langue</h4>
+                    <label>[[${user.langue}]]</label>
+                </div>
+            </div>
+            <a th:href="@{'/profile/edit'}"> Modifier </a>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

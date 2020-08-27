@@ -33,7 +33,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String id) {
         long indice = Long.valueOf(id);
-        return userRepository.findById(indice);
+        return getUserById(indice);
+    }
+
+    @Override
+    public User getUserById(long id) {
+        return userRepository.findById(id);
     }
 
     @Override
@@ -63,6 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+
     public String[] getRolesOf(User user) {
         List<RoleUser> all = roleUserRepository.findByUser(user);
         String[] roles = {};
@@ -75,6 +81,12 @@ public class UserServiceImpl implements UserService {
         }
         return roles;
     }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
 
 }
 

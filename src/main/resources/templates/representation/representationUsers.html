@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Liste des spectacles</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container">
+
+        <h1>Liste de mes spectacles réservés</h1>
+        <table class="table table-striped table-bordered" id="dtBasicExample" style="width:100%"
+               th:unless="${#lists.isEmpty('representationsUser')}">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">titre</th>
+                <th scope="col">Auteurs</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Nbre des places</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="repUser : ${representationsUser}">
+                <td><img height="120"
+                         th:src="@{${repUser.representation.fullUrlImg}}" width="100"/></td>
+                <td th:text="${{repUser.representation.show.title}}"></td>
+                <td th:text="${{repUser.representation.show.getListOfArtists()}}"></td>
+                <td th:text="${{repUser.representation.location.asString()}}"></td>
+                <td th:text="${{repUser.representation.whenTime}}"></td>
+                <td th:text="${{repUser.representation.show.price}+'€'}"></td>
+                <td th:text="${{repUser.places}}"></td>
+                <td>
+                    <a sec:authorize="hasAnyRole('MEMBER')" th:href="@{'/reservation/update/'+ ${repUser.id}}">
+                        Modifier </a>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">titre</th>
+                <th scope="col">Auteurs</th>
+                <th scope="col">Lieu</th>
+                <th scope="col">Date</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Nbre des places</th>
+                <th scope="col"></th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>

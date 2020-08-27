@@ -17,6 +17,8 @@ public interface UserService {
      */
     User getUserById(String id);
 
+    User getUserById(long id);
+
     /**
      * Find user by login
      *
@@ -26,4 +28,6 @@ public interface UserService {
     User getUserByLogin(String login);
 
     String[] getRolesOf(User user);
+
+    User save(User user);
 }

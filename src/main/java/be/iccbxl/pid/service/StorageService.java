@@ -15,4 +15,8 @@ public interface StorageService {
 
     Resource loadAsResource(String filename);
 
+    String fileNameWithPath(String filename);
+
+    Path getRootLocation();
+
 }

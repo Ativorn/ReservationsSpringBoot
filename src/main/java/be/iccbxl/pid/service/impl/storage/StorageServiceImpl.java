@@ -1,8 +1,9 @@
-package be.iccbxl.pid.service.impl;
+package be.iccbxl.pid.service.impl.storage;
 
 import be.iccbxl.pid.service.StorageService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,11 +12,14 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 
-public abstract class AbstractStorageService implements StorageService {
+@Service("storageService")
+public class StorageServiceImpl implements StorageService {
 
+    final Path rootLocation = Paths.get("imgs");
 
     @Override
     public void store(MultipartFile file, String newImageName) {
@@ -43,7 +47,7 @@ public abstract class AbstractStorageService implements StorageService {
 
     @Override
     public Path load(String filename) {
-        return getRootLocation().resolve(filename);
+        return getRootLocation().resolve(filename.replaceAll("_", "/"));
     }
 
     @Override
@@ -62,6 +66,16 @@ public abstract class AbstractStorageService implements StorageService {
         }
     }
 
+    @Override
+    public String fileNameWithPath(String filename) {
+        return filename;
+    }
+
+    @Override
+    public Path getRootLocation() {
+        return rootLocation;
+    }
+
 
     @Override
     public void init() {
@@ -72,5 +86,4 @@ public abstract class AbstractStorageService implements StorageService {
         }
     }
 
-    public abstract Path getRootLocation();
 }

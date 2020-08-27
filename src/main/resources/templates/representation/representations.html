@@ -1,12 +1,44 @@
 <!DOCTYPE html>
 <html layout:decorator="layouts/main"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Liste des spectacles</title>
 </head>
 <body>
 <div layout:fragment="content">
+
+    <div class="carousel slide" data-ride="carousel" id="carouselExampleControls">
+        <div class="carousel-inner">
+            <div>
+                <div class="carousel-item active" th:object="${activeItem}">
+                    <img class="d-block w-100" th:alt="${{activeItem.show.title}}" th:src="@{${activeItem.fullUrlImg}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>[[${activeItem.show.title}]]</h5>
+                        <p>[[${activeItem.whenTime}]]</p>
+                    </div>
+                </div>
+                <div class="carousel-item" th:each="spectacle : ${carousel}">
+                    <img class="d-block w-100" th:alt="${{spectacle.show.title}}" th:src="@{${spectacle.fullUrlImg}}">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>[[${spectacle.show.title}]]</h5>
+                        <p>[[${spectacle.whenTime}]]</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleControls" role="button">
+            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" data-slide="next" href="#carouselExampleControls" role="button">
+            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+
     <div class="container">
 
         <h1>Liste des spectacles</h1>
@@ -25,20 +57,20 @@
             </tr>
             </thead>
             <tbody>
-            private Show show;
-
-            private LocalDateTime when;
-
-            private Location location;
             <tr th:each="spectacle : ${representations}">
-                <td></td>
+                <td><img height="120"
+                         th:src="@{${spectacle.fullUrlImg}}" width="100"/></td>
                 <td th:text="${{spectacle.show.title}}"></td>
                 <td th:text="${{spectacle.show.getListOfArtists()}}"></td>
-                <td th:text="${{spectacle.location}}"></td>
+                <td th:text="${{spectacle.location.asString()}}"></td>
                 <td th:text="${{spectacle.whenTime}}"></td>
                 <td th:text="${{spectacle.show.price}}"></td>
                 <td th:text="${{spectacle.show.bookable}}"></td>
-                <td><a th:href="@{'/spectacles/update/'+ ${spectacle.id}}"> Modifier </a>
+                <td>
+                    <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{'/spectacles/update/'+ ${spectacle.id}}">
+                        Modifier </a>
+                    <a sec:authorize="hasAnyRole('MEMBER')" th:href="@{'/spectacles/book/'+ ${spectacle.id}}">
+                        Reserver </a>
                 </td>
             </tr>
             </tbody>
@@ -57,7 +89,7 @@
         </table>
 
     </div>
-    <div>
+    <div sec:authorize="hasAnyRole('ADMIN')">
         <form class="form-horizontal" th:action="@{/representations/add}">
             <button aria-expanded="false" aria-haspopup="true" class="btn btn-success"
                     type="button">

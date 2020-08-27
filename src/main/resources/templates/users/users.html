@@ -21,6 +21,7 @@
                 <th scope="col">email</th>
                 <th scope="col">langue</th>
                 <th scope="col">roles</th>
+                <th scope="col">active</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -34,8 +35,12 @@
                 <td th:text="${{user.email}}"></td>
                 <td th:text="${{user.langue}}"></td>
                 <td th:text="${{user.getRoles()}}"></td>
-                <td><a th:href="@{'/shows/update/'+ ${user.id}}"> Activer </a>
-                    <a th:href="@{'/shows/addArtist/'+ ${user.id}}"> + Artiste </a></td>
+                <td th:text="${{user.active}}"></td>
+                <td>
+                    <a th:href="@{'/users/activate/'+ ${user.id}}" th:unless="${{user.active}}"> Activer </a>
+                    <a th:href="@{'/users/desactivate/'+ ${user.id}}" th:if="${{user.active}}"> Desactiver </a>
+                    <a th:href="@{'/shows/addArtist/'+ ${user.id}}"> +Artiste </a>
+                </td>
             </tr>
             </tbody>
             <tfoot>
@@ -47,6 +52,7 @@
                 <th scope="col">email</th>
                 <th scope="col">langue</th>
                 <th scope="col">roles</th>
+                <th scope="col">active</th>
                 <th scope="col"></th>
             </tr>
             </tfoot>

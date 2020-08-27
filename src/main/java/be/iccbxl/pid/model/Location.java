@@ -16,7 +16,7 @@ public class Location {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    @Column(length = 60)
+    @Column(length = 60, unique = true)
     private String slug;
     @Column(length = 60)
     private String designation;

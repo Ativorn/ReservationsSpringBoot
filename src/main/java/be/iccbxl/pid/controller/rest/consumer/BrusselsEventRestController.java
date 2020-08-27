@@ -1,4 +1,4 @@
-package be.iccbxl.pid.controller.rest;
+package be.iccbxl.pid.controller.rest.consumer;
 
 
 import be.iccbxl.pid.service.rest.BrusselsEventRestService;

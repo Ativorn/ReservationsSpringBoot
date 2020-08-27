@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier un spectacle</title>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                Faire une reservaiton
+            </div>
+            <div class="card-body">
+
+                <form class="form-horizontal" th:action="@{/spectacles/book}" th:method="post"
+                      th:object="${representationUSer}">
+                    <input th:field="*{id}" type="hidden"/>
+                    <input th:field="*{representation}" type="hidden"/>
+
+                    <div class="form-group">
+                        <label>Titre de spectacle</label>
+                        <label>[[${representationUSer.representation.show.title}]]</label>
+                    </div>
+                    <div class="form-group">
+                        <label>Description de spectacle</label>
+                        <label>[[${representationUSer.representation.show.description}]]</label>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Prix de spectacle</label>
+                        <label>[[${representationUSer.representation.show.price}]]</label>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="places">Nbre des places </label>
+                        <input class="form-control" id="places" th:field="*{places}"
+                               type="number">
+                        <span class="badge badge-danger" th:errors="*{places}"
+                              th:if="${#fields.hasErrors('places')}"></span>
+                    </div>
+                    <button class="btn btn-primary" type="submit">
+                        Reserver
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

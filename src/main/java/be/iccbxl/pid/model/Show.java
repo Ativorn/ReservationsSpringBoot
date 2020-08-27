@@ -19,7 +19,7 @@ public class Show {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = 60)
+    @Column(length = 60, unique = true)
     private String slug;
     private String title;
 

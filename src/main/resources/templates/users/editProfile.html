@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/main"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifier Profile</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <br/>
+        <br/>
+        <div class="card" style="max-width:400px">
+            <div class="card-header" style="background-color: #65ddf1">
+                Modifier mon profil
+            </div>
+            <div class="card-body">
+
+                <form class="form-horizontal" enctype="multipart/form-data" th:action="@{/profile/edit}"
+                      th:method="post"
+                      th:object="${newUser}">
+                    <input th:field="*{id}" type="hidden"/>
+                    <input th:field="*{password}" type="hidden"/>
+                    <div class="form-group">
+                        <img height="auto"
+                             th:src="@{${newUser.fullUrlImg}}" width="100"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Url Photo</label>
+                        <input accept="image/jpeg" class="form-control" id="urlImg"
+                               name="file" placeholder=" ex.: fanta.jpeg" type="file"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input class="form-control" id="login" th:field="*{login}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" th:field="*{newPassword}" type="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">First name</label>
+                        <input class="form-control" id="firstname" th:field="*{firstname}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Last name</label>
+                        <input class="form-control" id="lastname" th:field="*{lastname}" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email adress</label>
+                        <input class="form-control" id="email" th:field="*{email}" type="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="langue">Langue</label>
+                        <input class="form-control" id="langue" th:field="*{langue}" type="text">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Modifier</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

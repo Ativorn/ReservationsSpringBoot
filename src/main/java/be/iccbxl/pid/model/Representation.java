@@ -34,6 +34,8 @@ public class Representation {
     @Transient
     private String time;
 
+    @Transient
+    private String fullUrlImg;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
