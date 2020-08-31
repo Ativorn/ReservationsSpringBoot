@@ -1,7 +1,6 @@
 package be.iccbxl.pid.controller.rest.producer;
 
 
-import be.iccbxl.pid.dto.Representation;
 import be.iccbxl.pid.service.RepresentationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +18,7 @@ public class RepresentationRestController {
     private RepresentationService service;
 
     @GetMapping("/representations")
-    public List<Representation> getAllRepresentations() {
+    public List<be.iccbxl.pid.dto.Representation> getAllRepresentations() {
         return service.getAllRepresentations()
                 .stream()
                 .map(rep -> new be.iccbxl.pid.dto.Representation(rep))

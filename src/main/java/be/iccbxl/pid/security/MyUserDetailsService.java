@@ -31,7 +31,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     /**
      * Return the connected user, a null if no user connected.
-     *
      * @return
      */
     public User getConnectedUser() {

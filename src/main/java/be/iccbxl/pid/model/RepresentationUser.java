@@ -25,7 +25,5 @@ public class RepresentationUser {
     @JoinColumn(name = "user_id")
     private User  user ;
 
-    @OneToOne
-    @JoinColumn(name = "places")
-    private Representation location_id ;
+    private int places;
 }

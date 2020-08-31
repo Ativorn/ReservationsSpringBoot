@@ -13,13 +13,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api")
 public class RegisterRestController {
     @Autowired
-    LanguageRestService LanguageService;
-    @Autowired
     private UserService service;
+
     @Autowired
     private RoleService roleService;
+
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    LanguageRestService LanguageService;
 
     @GetMapping("/isloginvalid/{login}")
     public Boolean activateArtist(@PathVariable String login) {

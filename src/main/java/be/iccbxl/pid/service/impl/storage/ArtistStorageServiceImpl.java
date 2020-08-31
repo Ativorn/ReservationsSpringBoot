@@ -14,7 +14,6 @@ public class ArtistStorageServiceImpl extends StorageServiceImpl {
     public Path getRootLocation() {
         return rootLocation;
     }
-
     @Override
     public String fileNameWithPath(String filename) {
         return "artist_" + filename;

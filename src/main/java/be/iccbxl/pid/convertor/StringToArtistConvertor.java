@@ -1,5 +1,4 @@
 package be.iccbxl.pid.convertor;
-
 import be.iccbxl.pid.model.Artist;
 import be.iccbxl.pid.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;

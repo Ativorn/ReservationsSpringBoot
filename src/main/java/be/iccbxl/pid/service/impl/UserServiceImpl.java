@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
         long indice = Long.valueOf(id);
         return getUserById(indice);
     }
-
     @Override
     public User getUserById(long id) {
         return userRepository.findById(id);
